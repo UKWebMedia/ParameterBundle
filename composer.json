@@ -1,0 +1,21 @@
+{
+    "name": "cannibal/parameter-bundle",
+    "description": "Provides an object interface for managing data parameters",
+    "keywords": ["rest", "parameters"],
+    "type": "symfony-bundle",
+    "license": "EPL",
+    "authors": [
+        {
+            "name": "Adam White",
+            "email": "cannibal234@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload":{
+        "psr-0":{
+            "Cannibal\\Bundle\\ParameterBundle": ""
+        }
+    },
+    "target-dir": "Cannibal/Bundle/ParameterBundle"
+}
