@@ -10,9 +10,7 @@ use Cannibal\Bundle\ParameterBundle\Parameter\ParameterCollectionInterface;
 class ParameterCollection implements ParameterCollectionInterface
 {
     private $name;
-    private $boundParameters;
-    private $expectedParameters;
-    private $unboundParameters;
+    private $parameters;
 
     public function __construct($name)
     {
@@ -35,7 +33,7 @@ class ParameterCollection implements ParameterCollectionInterface
     public function getParameter($name)
     {
         /** @var ParameterInterface $parameter */
-        foreach($this->getExpectedParameters() as $parameter){
+        foreach($this->getParameters() as $parameter){
             if($parameter->getName() == $name){
                 return $parameter;
             }
@@ -44,9 +42,9 @@ class ParameterCollection implements ParameterCollectionInterface
         return null;
     }
 
-    public function setParameters($expectedParameters)
+    public function setParameters($parameters)
     {
-        $this->expectedParameters = $expectedParameters;
+        $this->parameters = $parameters;
     }
 
     public function addParameter(ParameterInterface $param)
@@ -59,7 +57,7 @@ class ParameterCollection implements ParameterCollectionInterface
      */
     public function getParameters()
     {
-        return $this->expectedParameters;
+        return $this->parameters;
     }
 
     public function getName()

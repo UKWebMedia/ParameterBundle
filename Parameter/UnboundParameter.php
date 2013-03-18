@@ -1,47 +1,10 @@
 <?php
 namespace Cannibal\Bundle\ParameterBundle\Parameter;
 
-use Cannibal\Bundle\ParameterBundle\Annotation\Parameter\ParameterInterface;
+use Cannibal\Bundle\ParameterBundle\Annotation\ExpectedParameter\AbstractParameter;
 
-class UnboundParameter implements ParameterInterface
+class UnboundParameter extends AbstractParameter
 {
-    private $name;
-    private $value;
-
-    public function __construct()
-    {
-        $this->name = null;
-        $this->value = null;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function setValue($value)
-    {
-        $this->value = $value;
-    }
-
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * @return array
-     */
-    public function getOptions()
-    {
-        return array();
-    }
-
     /**
      * @return int
      */

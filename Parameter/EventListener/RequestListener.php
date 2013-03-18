@@ -15,9 +15,9 @@ use Doctrine\Common\Annotations\Reader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ConfigurationInterface;
 use Doctrine\Common\Util\ClassUtils;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Cannibal\Bundle\ParameterBundle\Annotation\ParameterInterface;
-use Cannibal\Bundle\ParameterBundle\Annotation\ExpectedParameterProcessor;
-use Cannibal\Bundle\ParameterBundle\Parameter\Expected\ExpectedParameterManager;
+use Cannibal\Bundle\ParameterBundle\Annotation\Parameter\ParameterInterface;
+use Cannibal\Bundle\ParameterBundle\Annotation\Processor\ParameterProcessor;
+use Cannibal\Bundle\ParameterBundle\Parameter\CollectionManager;
 
 class RequestListener implements EventSubscriberInterface
 {
@@ -33,7 +33,7 @@ class RequestListener implements EventSubscriberInterface
      *
      * @param Reader $reader An Reader instance
      */
-    public function __construct(Reader $reader, ExpectedParameterProcessor $expectedProcessor, ExpectedParameterManager $manager)
+    public function __construct(Reader $reader, ParameterProcessor $expectedProcessor, CollectionManager $manager)
     {
         $this->reader = $reader;
         $this->processor = $expectedProcessor;
@@ -46,14 +46,14 @@ class RequestListener implements EventSubscriberInterface
     }
 
     /**
-     * @return \Cannibal\Bundle\ParameterBundle\Parameter\Expected\ExpectedParameterManager
+     * @return \Cannibal\Bundle\ParameterBundle\Parameter\CollectionManager
      */
     public function getExpectedParameterManager()
     {
         return $this->manager;
     }
 
-    public function setProcessor($processor)
+    public function setProcessor(ParameterProcessor $processor)
     {
         $this->processor = $processor;
     }
@@ -98,11 +98,11 @@ class RequestListener implements EventSubscriberInterface
 
         $annotations = $this->reader->getMethodAnnotations($method);
 
-        $expected = $this->getProcessor()->extractExpectedParameterAnnotations($annotations);
+        $expected = $this->getProcessor()->extractParameterAnnotations($annotations);
 
-        $event->getRequest()->attributes->set('expected_parameter_annotations', $expected);
+        $event->getRequest()->attributes->set('parameter_annotations', $expected);
 
-        $this->getExpectedParameterManager()->setParameterCollections($expected);
+        $this->getExpectedParameterManager()->setCollections($expected);
     }
 
     /**

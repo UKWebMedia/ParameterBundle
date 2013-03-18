@@ -4,17 +4,20 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <parameters>
-        <parameter key="cannibal_fetcher.example.class">Cannibal\Bundle\ParameterBundle\Example</parameter>
+        <parameter id="cannibal_parameter.parameter.event_listener.class">Cannibal\Bundle\ParameterBundle\Parameter\EventListener\RequestListener</parameter>
+        <parameter id="cannibal_parameter.parameter.collection_manager.class">Cannibal\Bundle\ParameterBundle\Parameter\CollectionManager</parameter>
     </parameters>
 
     <services>
-        <service id="cannibal_fetcher.example" class="%cannibal_fetcher.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="cannibal_parameter.parameter.event_listener" class="%cannibal_parameter.parameter.event_listener.class%">
+            <tag name="kernel.event_subscriber" />
+            <argument id="annotation_reader" type="service"/>
+            <argument id="cannibal_parameter.parameter.collection_manager" type="service"/>
         </service>
+        
+        <service id="cannibal_parameter.annotation.parameter.processor"/>
+        <service id="cannibal_parameter.parameter.collection_manager" class=""/>
     </services>
-    -->
+
 </container>

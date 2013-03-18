@@ -10,10 +10,15 @@
 namespace Cannibal\Bundle\ParameterBundle\Annotation\Processor;
 
 use Cannibal\Bundle\ParameterBundle\Parameter\ParameterCollection;
+use Cannibal\Bundle\ParameterBundle\Annotation\Processor\ParameterProcessorInterface;
 use Cannibal\Bundle\ParameterBundle\Annotation\Parameter\ParameterInterface;
 
-class ExpectedParameterProcessor
+class ParameterProcessor implements ParameterProcessorInterface
 {
+    /**
+     * @param array $methodAnnotations
+     * @return ParameterCollection
+     */
     public function extractParameterAnnotations(array $methodAnnotations)
     {
         $parameters = new ParameterCollection('all');
